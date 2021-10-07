@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { registerRootComponent } from 'expo';
 
-import App from './App';
+import App from './search';
 // import HomeScreen from './demo';
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);

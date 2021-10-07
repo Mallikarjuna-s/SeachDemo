@@ -11,11 +11,6 @@ const App=()=> {
   const [data, setdata]=useState([]);
   // const [type, settype]=useState("")
 
-  const mockData = [
-    { id: '1', text: 'Expo 💙' },
-    { id: '2', text: 'is' },
-    { id: '3', text: 'Awesome!' }
-  ]
   useEffect(
     ()=>{
       getSearchlist();
@@ -24,8 +19,8 @@ const App=()=> {
     []
   )
 
-  const getSearchlist =()=>{
-    const url = `https://api.edamam.com/api/recipes/v2`
+  const getSearchlist =(query)=>{
+    const url = `https://api.edamam.com/api/recipes/v2?_embed&search=${query}`
     setloading(true);
     fetch(url,{
       method: "POST",
@@ -33,7 +28,7 @@ const App=()=> {
           Accept: "application/json",
           "Content-Type": "application/json",
       },
-      body: JSON.stringify({ type: "pubilc", q:"",app_key:"",app_id:'' })
+      body: JSON.stringify({ type: "pubilc", q:"",app_key:"",app_id:'',dishType:"",mealType:"",cuisineType:"",health:"" })
     })
     .then(res => res.json())
     .then(res => {
@@ -66,9 +61,8 @@ const App=()=> {
   }
 
 
- const contains = ({ name, email }, query) => {
-    const { first, last } = name
-    if (first.includes(query) || last.includes(query) || email.includes(query)) {
+ const contains = ({ dishType,mealType,cuisineType,health,ingredients}, query) => {
+    if (dishType.includes(query) || mealType.includes(query) || cuisineType.includes(query)|| health.includes(query)|| ingredients.includes(query)) {
       return true
     }
     return false
@@ -77,7 +71,7 @@ const App=()=> {
 
   const  handleSearch = text => {
     const formattedQuery = text.toLowerCase()
-    const data = filter(ingredians, item => {
+    const data = filter(ingredians || health || cuisineType || mealType || dishType, item => {
       return contains(item, formattedQuery)
     })
     setdata({ data, query: text })
@@ -124,8 +118,11 @@ const App=()=> {
   )
 
   const HomeScreen = () => {
-    // const recipe =ingredians.hits[0].recipe;
-    // const 
+    const ingredients =ingredians.hits[0].recipe.ingredients;
+    const cuisineType=ingredians.hits[0].recipe.cuisineType;
+    const mealType=ingredians.hits[0].recipe.mealType;
+    const dishType=ingredians.hits[0].recipe.dishType;
+    const health=ingredians.hits[0].recipe.health;
     <View
       style={{
         flex: 1,
@@ -134,14 +131,14 @@ const App=()=> {
         marginTop: 40
       }}>
       <FlatList
-        data={mockData}
-        keyExtractor={item => item.id}
+        data={ingredients||cuisineType||mealType||dishType||health}
+        // keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <Text style={{ fontSize: 22 }}>
-            {item.id} - {item.text}
+            {item.text}
           </Text>
         )}
-        keyExtractor={item => item.email}
+        keyExtractor={index => index.toLowerCase()}
         ItemSeparatorComponent={renderSeparator}
         ListFooterComponent={renderFooter}
         ListHeaderComponent={renderHeader}
