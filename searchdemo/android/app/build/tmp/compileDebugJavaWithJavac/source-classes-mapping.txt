@@ -1,0 +1,17 @@
+com/searchdemo/ReactNativeFlipper.java
+ com.searchdemo.ReactNativeFlipper
+ com.searchdemo.ReactNativeFlipper$1
+ com.searchdemo.ReactNativeFlipper$2
+ com.searchdemo.ReactNativeFlipper$2$1
+com/searchdemo/generated/BasePackageList.java
+ com.searchdemo.generated.BasePackageList
+com/searchdemo/MainActivity.java
+ com.searchdemo.MainActivity
+ com.searchdemo.MainActivity$1
+com/searchdemo/MainApplication.java
+ com.searchdemo.MainApplication
+ com.searchdemo.MainApplication$1
+com/searchdemo/BuildConfig.java
+ com.searchdemo.BuildConfig
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
