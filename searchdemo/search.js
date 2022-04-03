@@ -21,6 +21,7 @@ export default function App() {
     }
     return (
         <View style={styles.container}>
+            <View><Text>Search bar</Text></View>
             <Searchbar
                 placeholder="Search"
                 onChangeText={(text) => {
@@ -30,8 +31,8 @@ export default function App() {
                     setInput(text);
                     setSearchTimer(
                         setTimeout(() => {
-                            fetchData(text);
-                        }, 2000),
+                            fetchData(text)
+                        }, 20),
                     );
                 }}
                 value={input}
